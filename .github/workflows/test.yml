@@ -33,8 +33,7 @@ jobs:
           yum install -y git sudo tar gzip which
 
       - name: Checkout
-        run: |
-          git clone --depth 1 -b "${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}" "https://github.com/${GITHUB_REPOSITORY}.git" .
+        uses: actions/checkout@v4
 
       - name: Ensure system dependencies are installed
         run: |
@@ -116,8 +115,7 @@ jobs:
           yum install -y git sudo tar gzip which
 
       - name: Checkout
-        run: |
-          git clone --depth 1 -b "${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}" "https://github.com/${GITHUB_REPOSITORY}.git" .
+        uses: actions/checkout@v4
 
       - name: Ensure system dependencies are installed
         run: |
@@ -186,8 +184,7 @@ jobs:
           yum install -y git sudo tar gzip which
 
       - name: Checkout
-        run: |
-          git clone --depth 1 -b "${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}" "https://github.com/${GITHUB_REPOSITORY}.git" .
+        uses: actions/checkout@v4
 
       - name: Create python version file
         run: |
@@ -268,8 +265,7 @@ jobs:
           yum install -y git sudo tar gzip which
 
       - name: Checkout
-        run: |
-          git clone --depth 1 -b "${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}" "https://github.com/${GITHUB_REPOSITORY}.git" .
+        uses: actions/checkout@v4
 
       - name: Create python version file
         run: |
@@ -346,8 +342,7 @@ jobs:
           yum install -y git sudo tar gzip which
 
       - name: Checkout
-        run: |
-          git clone --depth 1 -b "${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}" "https://github.com/${GITHUB_REPOSITORY}.git" .
+        uses: actions/checkout@v4
 
       - name: Ensure system dependencies are installed
         run: |
