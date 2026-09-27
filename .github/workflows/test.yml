@@ -33,7 +33,7 @@ jobs:
           yum install -y git sudo tar gzip which
 
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
 
       - name: Ensure system dependencies are installed
         run: |
@@ -115,7 +115,7 @@ jobs:
           yum install -y git sudo tar gzip which
 
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
 
       - name: Ensure system dependencies are installed
         run: |
@@ -184,7 +184,7 @@ jobs:
           yum install -y git sudo tar gzip which
 
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
 
       - name: Create python version file
         run: |
@@ -265,7 +265,7 @@ jobs:
           yum install -y git sudo tar gzip which
 
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
 
       - name: Create python version file
         run: |
@@ -342,7 +342,7 @@ jobs:
           yum install -y git sudo tar gzip which
 
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
 
       - name: Ensure system dependencies are installed
         run: |
