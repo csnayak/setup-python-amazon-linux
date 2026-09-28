@@ -1,0 +1,56 @@
+name: Setup Python Amazon Linux
+
+on:
+  workflow_call:
+    inputs:
+      python-version:
+        required: true
+        type: string
+        description: "Version of python to be installed"
+
+jobs:
+  setup_python:
+    runs-on: ubuntu-latest
+    env:
+      UV_PATH: "${GITHUB_WORKSPACE}/.setup-python-amazon-linux/uv"
+      PYTHON_VERSION: "${{ inputs.python-version }}"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Ensure system dependencies are installed
+        run: |
+          command -v tar &>/dev/null || sudo dnf install -y tar
+          command -v gzip &>/dev/null || sudo dnf install -y gzip
+          command -v which &>/dev/null || sudo dnf install -y which
+
+      - name: Install uv
+        run: |
+          echo "Installing uv.. installation_directory=${UV_PATH}"
+          uv_version="0.11.11"
+          curl -LsSf "https://github.com/astral-sh/uv/releases/download/${uv_version}/uv-installer.sh" | UV_UNMANAGED_INSTALL="${UV_PATH}" bash --login
+
+      - name: Setup Python
+        run: |
+          installation_directory="${HOME}/.setup-python-amazon-linux/.python-versions/${PYTHON_VERSION}"
+          "${UV_PATH}/uv" venv --clear --python "${PYTHON_VERSION}" "${installation_directory}"
+          echo "${installation_directory}/bin" >> "${GITHUB_PATH}"
+
+      - name: Install pip
+        run: |
+          installation_directory="${HOME}/.setup-python-amazon-linux/.python-versions/${PYTHON_VERSION}"
+          "${installation_directory}/bin/python" -m ensurepip --upgrade
+          ln -sf "${installation_directory}/bin/pip3" "${installation_directory}/bin/pip"
+          "${installation_directory}/bin/pip" install --upgrade pip
+
+      - name: Verify Python installation
+        run: |
+          installation_directory="${HOME}/.setup-python-amazon-linux/.python-versions/${PYTHON_VERSION}"
+          export PATH="${installation_directory}/bin:$PATH"
+          set -x
+          which python3
+          which python
+          python3 --version
+          python --version
+          python3 --version 2>&1 | grep -F "${PYTHON_VERSION}"
+          test "$(python3 -m pip --version)" = "$(pip3 --version)"

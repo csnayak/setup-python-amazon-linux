@@ -1,0 +1,16 @@
+name: Test Setup Python Amazon Linux
+
+on:
+  workflow_dispatch:
+    inputs:
+      python-version:
+        required: true
+        type: string
+        description: "Python version to install"
+        default: "3.12"
+
+jobs:
+  test_setup_python:
+    uses: ./.github/workflows/setup-python-amazon-linux.yml
+    with:
+      python-version: ${{ inputs.python-version }}

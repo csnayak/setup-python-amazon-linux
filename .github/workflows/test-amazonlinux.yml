@@ -1,0 +1,35 @@
+name: Test Amazon Linux Runner
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test_amazonlinux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify environment
+        run: |
+          echo "=== OS Info ==="
+          cat /etc/os-release
+          echo ""
+          echo "=== Python ==="
+          python3 --version
+          echo ""
+          echo "=== Git ==="
+          git --version
+          echo ""
+          echo "=== Node ==="
+          node --version 2>/dev/null || echo "Node not installed"
+          echo ""
+          echo "=== Environment Variables ==="
+          cat /etc/environment
+
+      - name: Run a simple command
+        run: |
+          echo "Hello from Amazon Linux 2023!"
+          echo "Hostname: $(hostname)"
+          echo "User: $(whoami)"
+
+      - name: Test package manager
+        run: |
+          dnf --version
